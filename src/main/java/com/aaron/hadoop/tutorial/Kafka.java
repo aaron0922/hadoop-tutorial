@@ -11,12 +11,15 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 public class Kafka {
-    private static final String BOOTSTRAP_SERVER = "10.136.154.193:8089";
+    private static String BOOTSTRAP_SERVER;
     private Properties config;
     private Producer<String, String> producer = null;
     private KafkaConsumer<String, String> kafkaConsumer = null;
 
     public void init() throws Exception {
+        Properties prop = new Properties();
+        prop.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+        BOOTSTRAP_SERVER = prop.getProperty("kafka_bootstrap_server");
         config = new Properties();
         config.put("bootstrap.servers", BOOTSTRAP_SERVER);
         config.put("acks", "all");

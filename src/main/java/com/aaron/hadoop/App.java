@@ -5,14 +5,19 @@ import com.aaron.hadoop.tutorial.Hive;
 import com.aaron.hadoop.tutorial.Kafka;
 import com.aaron.hadoop.tutorial.Phoenix;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
+import java.util.Properties;
 
 public class App {
+
     public static void testHive() {
         try {
-            // init hive connection
             Hive hive = new Hive();
             hive.init();
+            System.exit(0);
             hive.showDatabases();
             hive.selectDatabase("test");
 //            hive.showTables();
@@ -105,11 +110,11 @@ public class App {
         }
     }
     public static void main(String[] args) {
-//        System.out.println("test hive");
-//        testHive();
-        testKafka();
+        testHive();
+//        testKafka();
 //        testHBase();
 //        testPhoenix();
+
         System.out.println("finish");
     }
 }

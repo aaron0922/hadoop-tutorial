@@ -11,20 +11,24 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 public class HBase {
     private static final Logger LOG = Logger.getLogger("com.delta.drc.tutorial.Hive");
-    private static final String ZK_QUORUM = "twtpedmp01.delta.corp,twtpedmp02.delta.corp,twtpedmp03.delta.corp";
-    private static final String ZK_PORT = "8083";
-    private static final String ZK_MASTER = "192.168.15.20:9998";
-    private static final String TABLE_NAME = "m_domain";
-    private static final String COLUMN_FAMILY_NAME = "cf";
+    private static String ZK_QUORUM;
+    private static String ZK_PORT;
+    private static String ZK_MASTER;
     private static Connection connection = null;
     private static Admin admin = null;
 
     public void init() throws Exception {
-//        HBaseConfiguration config = new HBaseConfiguration(); //old way
+        Properties prop = new Properties();
+        prop.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+        ZK_QUORUM = prop.getProperty("hbase_zk_quorum");
+        ZK_PORT = prop.getProperty("hbase_zk_port");
+        ZK_MASTER = prop.getProperty("hbase_zk_master");
+//        HBaseConfiguration config = new HBaseConfiguration(); //deprecate
         Configuration config = HBaseConfiguration.create();
         config.clear();
         config.set("hbase.zookeeper.quorum", ZK_QUORUM);

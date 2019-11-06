@@ -3,21 +3,24 @@ package com.aaron.hadoop.tutorial;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Properties;
 
 public class Phoenix {
     private static final String DRIVER_NAME = "org.apache.phoenix.jdbc.PhoenixDriver";
     //    private static final String DRIVER_NAME = "org.apache.phoenix.queryserver.client.Driver"; //thin
-    private static final String URL = "jdbc:phoenix:twtpedmp01.delta.corp,twtpedmp02.delta.corp,twtpedmp03.delta.corp";
-    //    private static final String URL = "jdbc:phoenix:twtpedmp01.delta.corp,twtpedmp02.delta.corp,twtpedmp03.delta.corp:8083";
-//    private static final String URL = "jdbc:phoenix:thin:url=http://twtpedmp01.delta.corp,twtpedmp02.delta.corp,twtpedmp03.delta.corp:8083";
-    private static final String USER = "d2map";
-    private static final String PASSWORD = "d2map";
-
+    private static String URL;
+    private static String USER;
+    private static String PASSWORD;
     private Connection conn;
     private Statement stat;
     private ResultSet rs;
 
     public void init() throws Exception {
+        Properties prop = new Properties();
+        prop.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+        URL = prop.getProperty("phoenix_url");
+        USER = prop.getProperty("phoenix_user");
+        PASSWORD = prop.getProperty("phoenix_password");
         Class.forName(DRIVER_NAME);
         conn = DriverManager.getConnection(URL, USER, PASSWORD);
         conn.setAutoCommit(true);
