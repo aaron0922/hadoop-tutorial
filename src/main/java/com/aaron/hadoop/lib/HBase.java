@@ -1,4 +1,4 @@
-package com.aaron.hadoop.tutorial;
+package com.aaron.hadoop.lib;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;

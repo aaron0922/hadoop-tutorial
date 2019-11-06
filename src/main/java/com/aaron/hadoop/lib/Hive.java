@@ -1,4 +1,4 @@
-package com.aaron.hadoop.tutorial;
+package com.aaron.hadoop.lib;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,7 +39,7 @@ public class Hive {
     }
     public void showTables() throws Exception {
         String sql = "show tables";
-        System.out.println("show tables");
+        System.out.println("show tables:");
         rs = stmt.executeQuery(sql);
         while (rs.next()) {
             System.out.println(rs.getString(1));
@@ -47,15 +47,8 @@ public class Hive {
     }
     public void selectDatabase(String db) throws Exception {
         String sql = "use " + db;
-        System.out.println("use " + db);
         stmt.execute(sql);
     }
-    public void createDatabase(String db) throws Exception {
-        String sql = "create database " + db;
-        System.out.println("Running: " + sql);
-        stmt.execute(sql);
-    }
-
 
     public void descTable(String table) throws Exception {
         String sql = "desc " + table;
@@ -67,7 +60,6 @@ public class Hive {
     }
 
     public void execute(String sql) throws Exception {
-        System.out.println("execute sql");
         stmt.execute(sql);
     }
 

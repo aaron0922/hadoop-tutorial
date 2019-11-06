@@ -1,4 +1,4 @@
-package com.aaron.hadoop.tutorial;
+package com.aaron.hadoop.lib;
 
 import java.sql.*;
 import java.util.ArrayList;
